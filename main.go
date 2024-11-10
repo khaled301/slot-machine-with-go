@@ -3,7 +3,6 @@ package main
 // implements formatted I/O
 import (
 	"fmt"
-	"math/rand"
 )
 
 func generateSymbols(symbols map[string]uint) []string {
@@ -16,51 +15,6 @@ func generateSymbols(symbols map[string]uint) []string {
 	}
 
 	return symbolArr
-}
-
-func printSpin(spin [][]string) {
-	for _, row := range spin {
-		for j, symbol := range row {
-			fmt.Printf(" %s ", symbol)
-			if j < len(row)-1 {
-				fmt.Printf("|")
-			}
-		}
-
-		fmt.Println()
-	}
-}
-
-func getRandomNumber(min int, max int) int {
-	return rand.Intn(max-min+1) + min
-}
-
-func getSpin(reel []string, rows int, cols int) [][]string {
-	result := [][]string{}
-
-	for i := 0; i < rows; i++ {
-		result = append(result, []string{})
-	}
-
-	for col := 0; col < cols; col++ {
-		selected := map[int]bool{}
-
-		for row := 0; row < rows; row++ {
-			for true {
-				randomIndex := getRandomNumber(0, len(reel)-1)
-
-				_, exists := selected[randomIndex]
-
-				if !exists {
-					selected[randomIndex] = true
-					result[row] = append(result[row], reel[randomIndex])
-					break
-				}
-			}
-		}
-	}
-
-	return result
 }
 
 func getWinResult(spin [][]string, multipliers map[string]uint) []uint {
@@ -118,8 +72,8 @@ func main() {
 
 		balance -= bet
 
-		spin := getSpin(symbolArr, 3, 3)
-		printSpin(spin)
+		spin := GetSpin(symbolArr, 3, 3) // imported from the spin.go
+		PrintSpin(spin)                  // imported from the spin.go
 
 		winLines := getWinResult(spin, multipliers)
 
