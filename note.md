@@ -45,3 +45,6 @@
 	// composite literal
 	var s = []int{1, 2, 3} // slice of integers of length 3 with values 1, 2, 3 | slice is a reference type
 	fmt.Println(s)
+
+	var strs [3]string | fixed sized array
+	var strSlice []string | Slice | resizable array | flexible version of fixed size array | can automatically resize
